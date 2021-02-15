@@ -1,221 +1,59 @@
-﻿/*public static class Services
+﻿using UnityEngine;
+
+public static class Services
 {
+    private static AIController _ai;
+    public static AIController AIManager
+    {
+        get
+        {
+            Debug.Assert(_ai != null);
+            return _ai;
+        }
+        set => _ai = value;
+    }
 
-	public static void InitializeServices()
-	{
-		Services.GameManager = this;
-		Services.EnemyManager = new EnemyManager();
-		Services.SpellDatabase = UnityEngine.Resources.Load<SpellDatabase>("test_database");
-	}
+    private static InputManager _input;
+    public static InputManager Input
+    {
+        get
+        {
+            Debug.Assert(_input != null);
+            return _input;
+        }
+        set => _input = value;
+    }
 
-	public static AudioSystem Audio;
-	public static GameController Controller;
-	public static GameManager GameManager;
-	public static EnemyManager EnemyManager;
-	public static SpellDatabase SpellDatabase;
+    private static GameController _gameController;
+    public static GameController GameController
+    {
+        get
+        {
+            Debug.Assert(_gameController != null);
+            return _gameController;
+        }
+        set => _gameController = value;
+    }
+
+    private static UserControlledPlayer[] _players;
+    public static UserControlledPlayer[] Players
+    {
+        get
+        {
+            Debug.Assert(_players != null);
+            return _players;
+        }
+        set => _players = value;
+    }
+
+    private static EventManager _eventManager;
+    public static EventManager EventManager
+    {
+        get
+        {
+            Debug.Assert(_eventManager != null);
+            return _eventManager;
+        }
+        set => _eventManager = value;
+    }
 }
-​
-​
-public class GameManager : Monbehavior
-{
-	private void Start()
-	{
-		// Initialization
-		Services.InitializeServices();
-	}
-​
-	public void Update()
-	{
-		// Update
-		Services.EnemyManager.Update();
-		Services.Player.Update();
-		Services.EnemyManager.Update();
-		Services.Network.Call();
-		Services.EnemyManager.Update(true);
-	}
-​
-	public void OnDestroy()
-	{
-		// Destruction
-		Services.EnemyManager.Destroy();
-	}
-}
-​
-public class EnemyManager
-{
-​
-	public List<Enemy> allEnemies = new List<Enemy>();
-​
-	public void Initialization()
-	{
-​
-	}
-​
-	public void Update(bool moveEnemies = false)
-	{
-		foreach (var enemy in SpawnedEnemies())
-		{
-			enemy.Update();
-​
-			if (!moveEnemies) continue;
-​
-			enemy.Move();
-		}
-	}
-​
-	public Enemy[] SpawnedEnemies() { }
-​
-	public void Destroy()
-	{
-​
-	}
-}
-​
-public class SpellDatabase : ScriptableObject
-{
-​
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//CLASS EXAMPLE
-
-
-
-
-/*public static class Services
-{
-
-	public static void InitializeServices()
-	{
-		Services.GameManager = this;
-		Services.EnemyManager = new EnemyManager();
-		Services.SpellDatabase = UnityEngine.Resources.Load<SpellDatabase>("test_database");
-	}
-​
-	public static GameManager GameManager;
-	public static EnemyManager EnemyManager;
-	public static SpellDatabase SpellDatabase;
-}
-​
-​
-public class GameManager : Monbehavior
-{
-	private void Start()
-	{
-		// Initialization
-		Services.InitializeServices();
-	}
-​
-	public void Update()
-	{
-		// Update
-		Services.EnemyManager.Update();
-		Services.Player.Update();
-		Services.EnemyManager.Update();
-		Services.Network.Call();
-		Services.EnemyManager.Update(true);
-	}
-​
-	public void OnDestroy()
-	{
-		// Destruction
-		Services.EnemyManager.Destroy();
-	}
-}
-​
-public class EnemyManager
-{
-​
-	public List<Enemy> allEnemies = new List<Enemy>();
-​
-	public void Initialization()
-	{
-​
-	}
-​
-	public void Update(bool moveEnemies = false)
-	{
-		foreach (var enemy in SpawnedEnemies())
-		{
-			enemy.Update();
-​
-			if (!moveEnemies) continue;
-​
-			enemy.Move();
-		}
-	}
-​
-	public Enemy[] SpawnedEnemies() { }
-​
-	public void Destroy()
-	{
-​
-	}
-}
-​
-public class SpellDatabase : ScriptableObject
-{
-​
-}
-​
-​
-​
-​
-​
-// *****//* OLD singleton example
-public class GameManager : Monobehavior
-{
-	public static GameManager Instance;
-	public const int MaxHP = 10;
-​
-	private void Start()
-	{
-		if (Instance == null)
-		{
-			Instance = this;
-		}
-		else
-		{
-			UnityEngine.Destroy(this);
-		}
-	}
-}
-​
-​
-public class Player
-{
-	public int hp { get; private set; }
-​
-	public void Start()
-	{
-		hp = GameManager.Instance.MaxHP;
-	}
-}
-*/

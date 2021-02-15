@@ -1177,7 +1177,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &327417535
 Transform:
   m_ObjectHideFlags: 0
@@ -10220,7 +10220,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2138007531}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6a75716fd84e8412c98469cc222b5adb, type: 3}
   m_Name: 
@@ -10228,6 +10228,7 @@ MonoBehaviour:
   moveSpeed: 5
   rb: {fileID: 2138007534}
   animator: {fileID: 2138007536}
+  thrust: 1
 --- !u!95 &2138007536
 Animator:
   serializedVersion: 3
