@@ -5,7 +5,7 @@ using UnityEngine;
 public class playerFollower : MonoBehaviour
 {
 
-    public Transform player;
+    //public Transform player;
     public float cameraDistance = 70.0f;
 
     private void Awake()
@@ -17,8 +17,11 @@ public class playerFollower : MonoBehaviour
 
 
     // Update is called once per frame
-    void FixedUpdate()
+    void LateUpdate()
     {
-        transform.position = new Vector3(player.position.x, player.position.y, -1);
+        if (Services.Players != null && Services.Players.Length > 0)
+        {
+            transform.position = new Vector3(Services.Players[0].position.x, Services.Players[0].position.y, -1);
+        }
     }
 }

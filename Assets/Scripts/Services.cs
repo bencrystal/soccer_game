@@ -13,6 +13,17 @@ public static class Services
         set => _ai = value;
     }
 
+    private static ScoreController _score;
+    public static ScoreController Score
+    {
+        get
+        {
+            Debug.Assert(_score != null);
+            return _score;
+        }
+        set => _score = value;
+    }
+
     private static InputManager _input;
     public static InputManager Input
     {
@@ -40,7 +51,7 @@ public static class Services
     {
         get
         {
-            Debug.Assert(_players != null);
+            //Debug.Assert(_players != null);
             return _players;
         }
         set => _players = value;

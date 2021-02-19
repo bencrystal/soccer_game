@@ -78,13 +78,15 @@ public class GoalScored : AGPEvent
 	}
 }
 
-//the following are in the gamecontroller class already?
-/*public class GameStarted : AGPEvent
-{
+public class GameStarted : AGPEvent { }
 
+public class TimedOut : AGPEvent
+{
+	public readonly int blueScore;
+	public readonly int redScore;
+
+	public TimedOut(int blueScore, int redScore)
+	{
+		this.blueScore = blueScore;
+	}
 }
-
-public class GameTimedOut : AGPEvent
-{
-
-}*/

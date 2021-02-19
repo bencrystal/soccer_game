@@ -18,7 +18,7 @@ public abstract class Player
         Right,
     }
 
-    private const float MovementSpeed = 3.0f;
+    private const float MovementSpeed = 5.0f;
 
     public bool playerTeam = false;
 
@@ -28,6 +28,8 @@ public abstract class Player
     private Vector3 _startingPosition;
     public Vector3 position => _gameObject.transform.position;
 
+    public Animator animator;
+
     #endregion
 
     #region Lifecycle Management
@@ -35,6 +37,7 @@ public abstract class Player
     protected Player(GameObject gameObject)
     {
         _gameObject = gameObject;
+        _gameObject.transform.parent = Services.GameController.inGame.transform;
         _spriteRenderer = _gameObject.GetComponent<SpriteRenderer>();
         _rigidbody2D = _gameObject.GetComponent<Rigidbody2D>();
     }
@@ -96,7 +99,9 @@ public abstract class Player
             newPosition += Time.deltaTime * MovementSpeed * Vector3.right;
         }
 
-        _rigidbody2D.MovePosition(newPosition);
+        _rigidbody2D.velocity = ((Vector2)newPosition - _rigidbody2D.position) / Time.fixedDeltaTime; //smoother movement
+
+        //_rigidbody2D.MovePosition(newPosition);
     }
 
     protected Direction[] GetDirections(Vector2 toMoveTowards)
@@ -137,7 +142,7 @@ public class AIPlayer : Player
     public override void Update()
     {
         _fsm.Update();
-        // MoveInDirection(_GetDirectionFromBallPosition());
+        MoveInDirection(_GetDirectionFromBallPosition());
     }
 
     #endregion
