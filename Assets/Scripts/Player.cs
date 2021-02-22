@@ -125,6 +125,23 @@ public abstract class Player
         return ballDirection.ToArray();
     }
 
+    public Direction[] GetOppositeDirections(GameObject toMoveTowards)
+    {
+        var x = toMoveTowards.transform.position.x;
+
+        var y = toMoveTowards.transform.position.y;
+
+        //return GetDirections(-toMoveTowards.transform.position.x, -toMoveTowards.transform.position.y);
+        var ballDirection = new List<Direction>();
+
+        ballDirection.Add(x > _gameObject.transform.position.x ? Direction.Left : Direction.Right);
+
+        ballDirection.Add(y > _gameObject.transform.position.y ? Direction.Down : Direction.Up);
+
+        return ballDirection.ToArray();
+    }
+
+
     #endregion
 }
 

@@ -6,12 +6,15 @@ using UnityEngine;
 public class AIController
 {
     private List<Player> _players;
+    private Referee _referee;
 
     #region Lifecycle Management
 
     public void Initialize()
     {
         _players = new List<Player>();
+        
+
         _CreateAIPlayers();
 
         _CreateReferee(); //SPAWNS REFEREE
@@ -45,6 +48,8 @@ public class AIController
         {
             player.Update();
         }
+
+        _referee.Update();
     }
 
     public void Destroy()
@@ -55,6 +60,8 @@ public class AIController
         {
             player.Destroy();
         }
+
+        _referee.Destroy();
     }
 
     #endregion
@@ -89,6 +96,7 @@ public class AIController
     private void _CreateReferee()
     {
         var playerGameObject = Object.Instantiate(Resources.Load<GameObject>("Referee"));
+        _referee = new Referee(playerGameObject);//.SetPosition(Random.Range(0.0f, -8.0f), Random.Range(-4.0f, 4.0f), true)); ;
     }
 
     private void OnGoalScored(AGPEvent e)
