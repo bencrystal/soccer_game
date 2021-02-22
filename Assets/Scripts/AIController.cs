@@ -14,6 +14,8 @@ public class AIController
         _players = new List<Player>();
         _CreateAIPlayers();
 
+        _CreateReferee(); //SPAWNS REFEREE
+
         Services.EventManager.Register<GoalScored>(OnGoalScored);
     }
 
@@ -57,6 +59,7 @@ public class AIController
 
     #endregion
 
+
     private void _CreateAIPlayers()
     {
         // Make blue players
@@ -76,6 +79,16 @@ public class AIController
             var playerGameObject = Object.Instantiate(Resources.Load<GameObject>("Player"));
             _players.Add(new AIPlayer(playerGameObject).SetTeam(false).SetPosition(Random.Range(0.0f, -8.0f), Random.Range(-4.0f, 4.0f), true));
         }
+
+        // Make referee
+        // var playerGameObject = Object.Instantiate(Resources.Load<GameObject>("Referee"));
+        //_players.Add(new AIPlayer(playerGameObject).SetTeam(false))
+            
+    }
+
+    private void _CreateReferee()
+    {
+        var playerGameObject = Object.Instantiate(Resources.Load<GameObject>("Referee"));
     }
 
     private void OnGoalScored(AGPEvent e)
