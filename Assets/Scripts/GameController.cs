@@ -78,7 +78,7 @@ public class GameController : MonoBehaviour
             Context.inGame.gameObject.SetActive(true);
 
             
-
+            //spawns in player, only makes sense in context of game being played
 
             var playerGameObject = Instantiate(Resources.Load<GameObject>("Player"));
             //_players.Add(new Player(playerGameObject).SetTeam(false).SetPosition(Random.Range(0.0f, -8.0f), Random.Range(-4.0f, 4.0f), true));

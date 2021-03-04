@@ -5,6 +5,8 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Serialization;
 using Object = System.Object;
+using BehaviorTree;
+
 
 public abstract class Player
 {
@@ -147,7 +149,89 @@ public abstract class Player
 
 public class AIPlayer : Player
 {
-    private FiniteStateMachine<AIPlayer> _fsm;
+    private BehaviorTree.Tree<AIPlayer> _tree;
+
+    public AIPlayer(GameObject gameObject) : base(gameObject)
+    {
+        var aggressive = new Tree<AIPlayer>(
+
+                            new Selector<AIPlayer>(
+
+                                new Sequence<AIPlayer>(
+
+                                    new Condition<AIPlayer>(ballOnSide),
+
+                                    new Do<AIPlayer>(hitPlayer))),
+
+                                new Do<AIPlayer>(tryToScore));
+
+
+        //var defensive...;
+
+
+        _tree = aggressive;
+
+
+
+
+
+
+
+
+
+
+
+    }
+
+    public bool ballOnSide(AIPlayer Context)
+    {
+        if (((Context.playerTeam) && (Services.GameController.ball.transform.position.x < 0)) ||
+            (!Context.playerTeam) && (Services.GameController.ball.transform.position.x > 0))
+        {
+            //if aggressive, hit player
+            return true;
+        }
+
+        else
+        {
+            //if aggressive, try to score
+            return false;
+        }
+    }
+
+
+    public bool hitPlayer(AIPlayer Context)
+    {
+        //find nearest player, and if enemy, go towards them
+        if (Services.AIManager.GetClosestPlayer(Context).playerTeam != Context.playerTeam)
+        {
+            //move towards them
+
+        }
+        return true;
+    }
+
+    public bool tryToScore(AIPlayer Context)
+    {
+        //position between ball and goal and try to score
+        return false;
+    }
+
+
+
+    public void Update()
+    {
+        _tree.Update(this);
+
+    }
+    
+
+
+
+
+
+
+    /*private FiniteStateMachine<AIPlayer> _fsm;
 
     #region Lifecycle Management
     public AIPlayer(GameObject gameObject) : base(gameObject)
@@ -213,8 +297,12 @@ public class AIPlayer : Player
 
     }
 
-    #endregion
+    #endregion*/
 }
+
+
+
+
 
 public class UserControlledPlayer : Player
 {
